@@ -15,7 +15,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    return a / b;
+    return (a / b).toFixed(2);
 }
 
 function operate(operator, a, b) {
@@ -25,14 +25,12 @@ function operate(operator, a, b) {
         case "subtract":
             return subtract(a, b);
         case "multiply":
-            multiply(a, b);
-            break;
+            return multiply(a, b);
         case "divide":
-            divide(a, b);
-            break;
+            return divide(a, b);
         default:
             return "Error: not a functional operation!";
     }
 }
 
-console.log(operate("subtract", 5, 7));
+console.log(operate("divide", 25, 7));

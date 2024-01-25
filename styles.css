@@ -47,6 +47,10 @@ body {
     padding: 0;
 }
 
+.number-buttons button:hover {
+    background-color: #9ba785;
+}
+
 .operator-buttons {
     display: flex;
     flex-direction: column;
@@ -56,6 +60,10 @@ body {
 
 .operator-buttons button {
     background-color: #b89aca;
+}
+
+.operator-buttons button:hover {
+    background-color: #c6aed4;
 }
 
 button {
@@ -70,4 +78,15 @@ button {
 #zero,
 #placeholder {
     width: 220px;
+}
+
+#placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cog {
+    height: 65px;
+    width: 65px;
 }

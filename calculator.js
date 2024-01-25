@@ -1,5 +1,6 @@
 let a = 0;
-let b = 0;
+let intermediateDisplayNumber = 0;
+let intermediateResult = 0;
 let operator;
 let displayNumber = 0;
 
@@ -26,30 +27,89 @@ btn0.addEventListener("click", () => displayNumbers(calculateDisplayNumber(0)));
 let btnClear= document.querySelector("#clear");
 btnClear.addEventListener("click", () => {
     displayNumber = 0;
+    a = 0;
     displayNumbers(displayNumber);
 });
 
+let btnOptions = document.querySelector("#placeholder");
+btnOptions.addEventListener("click", () => alert("Clear all numbers before next operation!" + 
+                                                "\nDecimal button still work in progress!"));
+
 let btnEquals = document.querySelector("#result");
 btnEquals.addEventListener("click", () => {
-    switch(operator) {
-        case "add":
-            displayNumbers(add(a, displayNumber));
-            break;
-        default:
-            return "Error";
-    }
+    a = operate(operator, a, displayNumber);
+    displayNumbers(a);
     a = 0;
 });
 
 let btnAdd = document.querySelector("#add");
 btnAdd.addEventListener("click", () => {
     if (a != 0) {
-        a += displayNumber;
+        if (operator != "add") {
+            a = operate(operator, a, displayNumber);
+        } else {
+            a = operate("add", a, displayNumber);
+        }
+        displayNumbers(a);
         displayNumber = 0;
         operator = "add";
     } else {
         a = displayNumber;
         operator = "add";
+        displayNumber = 0;
+    }
+});
+
+let btnSub = document.querySelector("#subtract");
+btnSub.addEventListener("click", () => {
+    if (a != 0) {
+        if (operator != "subtract") {
+            a = operate(operator, a, displayNumber);
+        } else {
+            a = operate("subtract", a, displayNumber);
+        }
+        displayNumbers(a);
+        displayNumber = 0;
+        operator = "subtract";
+    } else {
+        a = displayNumber;
+        operator = "subtract";
+        displayNumber = 0;
+    }
+});
+
+let btnDiv = document.querySelector("#divide");
+btnDiv.addEventListener("click", () => {
+    if (a != 0) {
+        if (operator != "divide") {
+            a = operate(operator, a, displayNumber);
+        } else {
+            a = operate("divide", a, displayNumber);
+        }
+        displayNumbers(a);
+        displayNumber = 0;
+        operator = "divide";
+    } else {
+        a = displayNumber;
+        operator = "divide";
+        displayNumber = 0;
+    }
+});
+
+let btnMult = document.querySelector("#multiply");
+btnMult.addEventListener("click", () => {
+    if (a != 0) {
+        if (operator != "multiply") {
+            a = operate(operator, a, displayNumber);
+        } else {
+            a = operate("multiply", a, displayNumber);
+        }
+        displayNumbers(a);
+        displayNumber = 0;
+        operator = "multiply";
+    } else {
+        a = displayNumber;
+        operator = "multiply";
         displayNumber = 0;
     }
 });
@@ -69,6 +129,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+    if (b == 0) {
+        return "Bad kitty!";
+    }
     return (a / b).toFixed(2);
 }
 
@@ -83,7 +146,7 @@ function operate(operator, a, b) {
         case "divide":
             return divide(a, b);
         default:
-            return "Error: not a functional operation!";
+            return 0;
     }
 }
 

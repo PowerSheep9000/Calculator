@@ -1,5 +1,5 @@
-let a;
-let b;
+let a = 0;
+let b = 0;
 let operator;
 let displayNumber = 0;
 
@@ -24,7 +24,35 @@ btn9.addEventListener("click", () => displayNumbers(calculateDisplayNumber(9)));
 let btn0 = document.querySelector("#zero");
 btn0.addEventListener("click", () => displayNumbers(calculateDisplayNumber(0)));
 let btnClear= document.querySelector("#clear");
-btnClear.addEventListener("click", () => displayNumbers(0));
+btnClear.addEventListener("click", () => {
+    displayNumber = 0;
+    displayNumbers(displayNumber);
+});
+
+let btnEquals = document.querySelector("#result");
+btnEquals.addEventListener("click", () => {
+    switch(operator) {
+        case "add":
+            displayNumbers(add(a, displayNumber));
+            break;
+        default:
+            return "Error";
+    }
+    a = 0;
+});
+
+let btnAdd = document.querySelector("#add");
+btnAdd.addEventListener("click", () => {
+    if (a != 0) {
+        a += displayNumber;
+        displayNumber = 0;
+        operator = "add";
+    } else {
+        a = displayNumber;
+        operator = "add";
+        displayNumber = 0;
+    }
+});
 
 displayNumbers(displayNumber);
 
